@@ -8,22 +8,22 @@ plugins:
 
 #-------------------------------
 # General Site Settings
-title: Johnny Hopkins
-description: "Hi I'm Johnny, and I'm a Data Scientist.  My portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my Resume) by using the links below!"
+title: Taimoor Ahmed Khan
+description: "Hi, I'm Taimoor – a dynamic Data Scientist and Business Intelligence professional turning complex data into actionable insights. My portfolio showcases innovative projects where I focus on business growth, operational efficiency and drive revenue growth. Visit my Github, LinkedIn, or download my resume using the links below to learn more!"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 #-------------------------------
 # About Section
 subtitle: Data Science <span style="color:#f58506"> Portfolio </span>
-location: "London, UK"
-resume_url: /docs/resume.docx
-avatar_image: /img/profile_picture.JPG
+location: "Los Angeles, USA"
+resume_url: /docs/Taimoor_Ahmed_Khan_Resume_January-2025.docx
+avatar_image: /img/Cropped-tk.png
 
 #-------------------------------
 # Contact links
-linkedln: "https://linkedln.com/#" # Add your linkedln handle
-github: "https://github.com/#"  # Add your github handle
+linkedln: "https://www.linkedin.com/in/taimoor-khan-analyzewithtk/" # Add your linkedln handle
+github: "https://github.com/teekay094"  # Add your github handle
 
 paginate: 6
 paginate_path: "/page/:num"
