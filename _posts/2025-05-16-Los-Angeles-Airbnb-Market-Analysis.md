@@ -47,9 +47,7 @@ We pulled the latest AirBnb Data, cleaned missing values, and built visuals to s
 
 <br>
 <br>
-
 ___
-
 # Concept Overview  <a name="concept-overview"></a>
 
 <br>
@@ -76,4 +74,6 @@ This project weaves together three analytical strands:
 
 By integrating *granular listing data* with *policy chronology* and *pandemic timelines*, we produce insights that inform hosts weighing investment decisions, city officials balancing tourism with housing pressures, and travelers hunting value in a post-COVID landscape.
 <br>
-
+___
+<br>
+# Data Overview & Preparation  <a name="data-overview"></a>
