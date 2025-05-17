@@ -50,3 +50,13 @@ We pulled the latest AirBnb Data, cleaned missing values, and built visuals to s
 
 ___
 
+# Concept Overview  <a name="concept-overview"></a>
+
+<br>
+We marry exploratory data analysis (EDA) with policy & market research to explain price movements.
+Key questions:
+1. Which L.A. neighborhoods are most/least expensive?
+2. How does capacity (beds) drive price in premium enclaves?
+3. What happened to listings & rates when regulation was debated (2016-17) and when COVID-19 struck (2020)?
+<br>
+
