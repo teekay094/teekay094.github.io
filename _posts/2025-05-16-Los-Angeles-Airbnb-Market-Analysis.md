@@ -31,7 +31,6 @@ Los Angeles began crafting short-term-rental (STR) rules in April 2016 with a dr
 <br>
 <br>
 ### Actions <a name="overview-actions"></a>
-
 We pulled the latest AirBnb Data, cleaned missing values, and built visuals to show:
 
 * Correlations among numeric fields.
