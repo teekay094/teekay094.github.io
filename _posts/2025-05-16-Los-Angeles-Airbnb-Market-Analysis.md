@@ -32,7 +32,7 @@ Los Angeles began crafting short-term-rental (STR) rules in April 2016 with a dr
 <br>
 ### Actions <a name="overview-actions"></a>
 
-We pulled the latest AirBnb Data , cleaned missing values, and built visuals to show:
+We pulled the latest AirBnb Data, cleaned missing values, and built visuals to show:
 
 * Correlations among numeric fields.
 * Mean price by neighborhood & capacity.
@@ -40,4 +40,14 @@ We pulled the latest AirBnb Data , cleaned missing values, and built visuals to 
 
 <br>
 <br>
+### Results & Discussion <a name="overview-results"></a>
+
+* Bel-Air, Venice, Malibu command the highest nightly rates, while Lincoln Heights, Pacoima, Watts sit at the bottom range.
+* Listing growth stalled right after the 2016 draft law surfaced, even before enforcement began. 
+* Average nightly price dipped ≈15 % in 2020, but exceeded 2019 levels by mid-2021 as bookings shifted to 28-day-plus stays.
+
+<br>
+<br>
+
+___
 
