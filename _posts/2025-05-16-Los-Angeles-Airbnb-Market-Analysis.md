@@ -27,3 +27,17 @@ ___
 ### Context <a name="overview-context"></a>
 
 Los Angeles began crafting short-term-rental (STR) rules in April 2016 with a draft Home-Sharing Ordinance. Public debate stretched through 2017, culminating in the final ordinance adopted in December 2018. When COVID-19 hit in early 2020, global travel collapsed—yet demand later rebounded on the back of long-stay “work-from-anywhere” trips.
+
+<br>
+<br>
+### Actions <a name="overview-actions"></a>
+
+We pulled the latest AirBnb Data , cleaned missing values, and built visuals to show:
+
+* Correlations among numeric fields.
+* Mean price by neighborhood & capacity.
+* Year-on-year host growth and average nightly rates.
+
+<br>
+<br>
+
