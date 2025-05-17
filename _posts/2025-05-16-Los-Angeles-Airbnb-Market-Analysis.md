@@ -21,3 +21,9 @@ I have been a Los Angeles native for about 5 years now, everytime a loved one vi
 - [06. Insights & Discussion](#discussion)
 
 ___
+
+# Project Overview  <a name="overview-main"></a>
+
+### Context <a name="overview-context"></a>
+
+Los Angeles began crafting short-term-rental (STR) rules in April 2016 with a draft Home-Sharing Ordinance. Public debate stretched through 2017, culminating in the final ordinance adopted in December 2018. When COVID-19 hit in early 2020, global travel collapsed—yet demand later rebounded on the back of long-stay “work-from-anywhere” trips.
