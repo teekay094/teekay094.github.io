@@ -53,10 +53,27 @@ ___
 # Concept Overview  <a name="concept-overview"></a>
 
 <br>
-We marry exploratory data analysis (EDA) with policy & market research to explain price movements.
-Key questions:
-1. Which L.A. neighborhoods are most/least expensive?
-2. How does capacity (beds) drive price in premium enclaves?
-3. What happened to listings & rates when regulation was debated (2016-17) and when COVID-19 struck (2020)?
+Los Angeles offers an ideal natural experiment for studying how **local policy shocks** and a **global demand shock** interact in a large, high-value short-term-rental (STR) market.  
+This project weaves together three analytical strands:
+
+| Strand | What we do | Why it matters |
+|--------|------------|----------------|
+| **Descriptive market mapping** | • Clean the latest *InsideAirbnb* snapshot<br>• Profile host tenure, occupancy capacity, review counts, and price distribution city-wide | Establishes the baseline “shape” of supply and price dispersion before layering in external forces |
+| **Spatial segmentation** | • Aggregate listings by `neighbourhood_cleansed` and rank mean nightly rates<br>• Visualize the top- and bottom-priced tracts, then drill into capacity-price curves for luxury enclaves like Bel-Air | Shows how geography and property size magnify price gaps—critical for housing-affordability debates |
+| **Temporal & event-study analysis** | • Resample hosts and prices by `host_since` year<br>• Overlay two exogenous events: (1) the 2016–2017 Home-Sharing Ordinance debate, and (2) the 2020 COVID-19 travel collapse | Quantifies how *regulatory expectations* (not just final laws) slow supply growth, and how a sudden demand shock first depresses, then re-prices the market |
+
+### Research questions we answer
+
+1. **Price ladder:** How steep is the nightly price gradient across L.A. neighborhoods, and which factors—location or capacity—drive it most?  
+2. **Policy anticipatory effects:** Did listing growth decelerate as soon as the draft ordinance appeared, even before enforcement?  
+3. **Pandemic resilience:** How quickly did nightly rates and active listings recover after the initial 2020 plunge, and did hosts pivot toward long-stay bookings?  
+
+### Methodological touchpoints
+
+* **Data engineering** – Robust missing-value imputation (median for numerics, mode for categoricals) to ensure fair cross-neighborhood comparisons.  
+* **Visualization-first EDA** – Correlation heat-maps, dual-axis time series, and wrapped bar-charts make complex patterns legible at a glance.  
+* **Policy literature triangulation** – Pair findings with academic papers, city-council dockets, and AirDNA trend reports to ground numbers in real-world context.  
+
+By integrating *granular listing data* with *policy chronology* and *pandemic timelines*, we produce insights that inform hosts weighing investment decisions, city officials balancing tourism with housing pressures, and travelers hunting value in a post-COVID landscape.
 <br>
 
