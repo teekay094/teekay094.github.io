@@ -77,3 +77,45 @@ By integrating *granular listing data* with *policy chronology* and *pandemic ti
 ___
 <br>
 # Data Overview & Preparation  <a name="data-overview"></a>
+
+For this project we rely on the public **InsideAirbnb “listings” snapshot** for Los Angeles.  
+Our immediate goal is to clean the raw file just enough to support the exploratory work that follows.
+
+In the code below, we:
+
+* Load the Python libraries needed for data wrangling and visualization  
+* Import the *listings.csv* snapshot and parse the `host_since` date column  
+* Impute missing values — **median** for all numeric columns, **mode** for all categorical columns — to avoid bias from row-wise deletion  
+* Trim the dataset down to the four fields required for the rest of the analysis:  
+  `host_since`, `neighbourhood_cleansed`, `accommodates`, and `price`
+
+<br>
+
+```python
+# --- Quick Summary --------------------------------------------
+# • Load snapshot and parse host_since dates.  
+# • Impute missing values (median for numerics, mode for categoricals).  
+# • Keep only the columns we need for analysis.
+# --------------------------------------------------------------
+
+import pandas as pd, numpy as np
+import matplotlib.pyplot as plt, seaborn as sns, textwrap
+
+# 1 Load -------------------------------------------------
+listings = pd.read_csv("listings.csv")
+listings["host_since"] = pd.to_datetime(listings["host_since"])
+
+# 2 Impute ----------------------------------------------
+num_cols = listings.select_dtypes(np.number).columns
+cat_cols = listings.select_dtypes(object).columns
+listings[num_cols] = listings[num_cols].fillna(listings[num_cols].median())
+listings[cat_cols] = listings[cat_cols].fillna(listings[cat_cols].mode().iloc[0])
+
+# 3 Focus subset ----------------------------------------
+la_core = listings[["host_since", "neighbourhood_cleansed",
+                    "accommodates", "price"]].dropna()
+
+
+```
+
+<br>
