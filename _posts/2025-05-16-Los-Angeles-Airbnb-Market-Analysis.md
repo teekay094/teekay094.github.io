@@ -126,3 +126,18 @@ listings[categorical_cols] = listings[categorical_cols].fillna(listings[categori
 <br>
 # Exploratory Analysis <a name="exploratory-analysis"></a>
 
+### Correlation Heat-Map
+
+### Quick Take-aways from the Heat-Map
+
+| Observation | What it suggests |
+|-------------|------------------|
+| **Strong positive cluster:** `accommodates`, `bedrooms`, `bathrooms`, `beds` (ρ ≈ 0.62–0.81) | Bigger properties naturally come with more rooms and beds—no surprise, but the tight block of warm colors confirms multicollinearity among size variables. |
+| **Price correlations:** highest with `bathrooms` (≈ 0.47) and `bedrooms` (≈ 0.36); moderate with `accommodates` (≈ 0.33) and `beds` (≈ 0.29) | Nightly price rises with property size, and bathrooms seem to be the single best numeric proxy for “luxury” in this dataset. |
+| **Host & review metrics:** near-zero correlation between `host_response_rate` and `price`; slight negative tie between `number_of_reviews` and `price` | High responsiveness doesn’t translate into higher prices, and listings with lots of reviews tend to be mid-range or budget offerings. |
+| **Temporal hint:** `id` (proxy for listing age) shows a **–0.32** correlation with `number_of_reviews` | Older listings (low `id` numbers) have had more time to accumulate reviews, matching intuition. |
+| **Minimum nights & availability:** weak relationships with everything (|ρ| < 0.15) | Minimum-stay rules and calendar availability don’t meaningfully co-vary with price in this snapshot. |
+
+**Take-home:** Property *size* drives price far more than host behavior or review volume. Because the size variables move together, downstream modeling should avoid including them all in an **unregularized** regression—you’ll get inflated variance.
+
+
