@@ -85,7 +85,7 @@ In the code below, we:
 
 * Load the Python libraries needed for data wrangling and visualization  
 * Import the *listings.csv* snapshot and parse the `host_since` date column  
-* Impute missing values — **median** for all numeric columns — to avoid bias from row-wise deletion  
+* Impute missing values — **median** for all numeric columns  and **mode** for all categorical columns — to avoid bias from row-wise deletion  
 * Trim the dataset down to the four fields required for the rest of the analysis:  
   `host_since`, `neighbourhood_cleansed`, `accommodates`, and `price`
 
@@ -120,6 +120,15 @@ listings[numerical_cols] = listings[numerical_cols].fillna(listings[numerical_co
 # Fill missing categorical values with mode
 categorical_cols = listings.select_dtypes(include=[object]).columns
 listings[categorical_cols] = listings[categorical_cols].fillna(listings[categorical_cols].mode().iloc[0])
+
+#Lis
+losangeles_neighborhood = (listings.loc[:,['host_since','neighbourhood_cleansed','accommodates','price']])
+losangeles_neighborhood.isna().sum()
+losangeles_neighborhood.dropna(how='any',inplace = True)
+
+losangeles_neighborhood.describe()
+
+losangeles_neighborhood.query('price <= 10')
 
 ```
 
