@@ -85,7 +85,7 @@ In the code below, we:
 
 * Load the Python libraries needed for data wrangling and visualization  
 * Import the *listings.csv* snapshot and parse the `host_since` date column  
-* Impute missing values — **median** for all numeric columns, **mode** for all categorical columns — to avoid bias from row-wise deletion  
+* Impute missing values — **median** for all numeric columns — to avoid bias from row-wise deletion  
 * Trim the dataset down to the four fields required for the rest of the analysis:  
   `host_since`, `neighbourhood_cleansed`, `accommodates`, and `price`
 
@@ -94,28 +94,35 @@ In the code below, we:
 ```python
 # --- Quick Summary --------------------------------------------
 # • Load snapshot and parse host_since dates.  
-# • Impute missing values (median for numerics, mode for categoricals).  
+# • Impute missing values (median for numerics).  
 # • Keep only the columns we need for analysis.
 # --------------------------------------------------------------
 
-import pandas as pd, numpy as np
-import matplotlib.pyplot as plt, seaborn as sns, textwrap
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# 1 Load -------------------------------------------------
-listings = pd.read_csv("listings.csv")
-listings["host_since"] = pd.to_datetime(listings["host_since"])
+listings = pd.read_csv('listings.csv')
 
-# 2 Impute ----------------------------------------------
-num_cols = listings.select_dtypes(np.number).columns
-cat_cols = listings.select_dtypes(object).columns
-listings[num_cols] = listings[num_cols].fillna(listings[num_cols].median())
-listings[cat_cols] = listings[cat_cols].fillna(listings[cat_cols].mode().iloc[0])
+pds = listings.head()
 
-# 3 Focus subset ----------------------------------------
-la_core = listings[["host_since", "neighbourhood_cleansed",
-                    "accommodates", "price"]].dropna()
+listings.info()
 
+listings['host_since'] = pd.to_datetime(listings['host_since'])
+
+listings.info()
+
+# Fill missing numerical values with median
+numerical_cols = listings.select_dtypes(include=[np.number]).columns
+listings[numerical_cols] = listings[numerical_cols].fillna(listings[numerical_cols].median())
+
+# Fill missing categorical values with mode
+categorical_cols = listings.select_dtypes(include=[object]).columns
+listings[categorical_cols] = listings[categorical_cols].fillna(listings[categorical_cols].mode().iloc[0])
 
 ```
 
 <br>
+# Exploratory Analysis <a name="exploratory-analysis"></a>
+
