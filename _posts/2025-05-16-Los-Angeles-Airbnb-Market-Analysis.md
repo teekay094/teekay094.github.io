@@ -222,3 +222,25 @@ plt.show()
 ![alt text](/img/posts/lowest_average_pricing_by_los_angeles_neighborhood.jpg)
 
 *Bel-Air*, *Venice*, and *Malibu* remain the priciest, while *Lincoln Heights* and *Pacoima cluster* at the lower end.
+
+### TEMPORAL TRENDS
+
+First I started looking at Average Yearly price for Los Angeles Neighborhoods:
+
+```python
+losangeles_listing_overtime['price'].plot(
+        ylabel = 'Average Price per night(USD)',
+        title = 'AVERAGE LISTING PRICE OVER TIME IN LOS ANGELES NEIGHBORHOODS',
+        color ='orange'
+        )
+sns.despine()
+plt.show()
+
+```
+
+<br>
+
+* Image here
+
+Looking at this visual, I noticed that there were 2 phases over the years where price changed spike and I looked up in to more information and found that there was impact because of the 2016-17 rule-making period already created regulatory uncertainty and COVID-19.
+
