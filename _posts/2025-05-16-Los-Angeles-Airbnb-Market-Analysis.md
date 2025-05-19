@@ -326,7 +326,7 @@ plt.show()
 * Explosive host growth from 2014–2016, plateauing once the draft ordinance surfaced in 2016–17.
 * A sharp price dip in 2020 coincides with the COVID-19 travel shutdown, followed by an above-trend rebound in 2021–22.
 
-#Regulatory Context (2016-2017)  <a name="regulatory-deep-dive-analysis"></a>
+# Regulatory Context (2016-2017)  <a name="regulatory-deep-dive-analysis"></a>
 
 
 | Milestone | Summary | Source |
@@ -340,7 +340,7 @@ plt.show()
 
 ---
 
-#COVID-19 Impact Analysis (2020-2021)  <a name="covid-19-impact-analysis"></a>
+# COVID-19 Impact Analysis (2020-2021)  <a name="covid-19-impact-analysis"></a>
 
 | Impact Point | Evidence | Source |
 |--------------|----------|--------|
