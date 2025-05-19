@@ -246,7 +246,7 @@ plt.show()
 
 <br>
 
-* Image here of Accomodation Pricing
+![alt text](/img/posts/average_listing_price_accomodation_number.jpg)
 
 ### TEMPORAL TRENDS
 
@@ -262,10 +262,61 @@ sns.despine()
 plt.show()
 
 ```
-
 <br>
 
-* Image here of Yearly Average Listing Price by Neighborhoods
+![alt text](/img/posts/average_listing_price_over_time.jpg)
 
 Looking at this visual, I noticed that there were 2 phases over the years where price changed spike and I looked up in to more information and found that there was impact because of the 2016-17 rule-making period already created regulatory uncertainty and COVID-19. This intrigued me to do more research and take a deeper dive into regulations of Los Angeles and also the impact of COVID-19 on the number of listings & pricing.
+
+Then I generated a Dual-Axis chart of AirBnB annual listing counts over the Year alongside the Average Pricing per Night in Los Angeles Neighborhoods, this allowed me to drive more insights about the Annual Listings and Average Pricing and the assumptions I had related to fluctuation in pricing near 2016-2017 and around 2019.
+
+```python
+df_yearly = losangeles_listing_overtime.copy()
+df_yearly.index = df_yearly.index.year
+
+fig, ax1 = plt.subplots(figsize=(10, 6))
+
+
+ax1.bar(df_yearly.index,
+        df_yearly['neighbourhood_cleansed'],
+        color='tab:blue',
+        label='Listing count')
+
+ax1.set_xlabel('Year host_since')
+ax1.set_ylabel('Number of listings', color='tab:blue')
+ax1.tick_params(axis='y', labelcolor='tab:blue')
+
+ax2 = ax1.twinx()
+ax2.plot(df_yearly.index,
+         df_yearly['price'],
+         color='tab:orange',
+         marker='o',
+         linewidth=2,
+         label='Average price')
+
+ax2.set_ylabel('Average price (USD)', color='tab:orange')
+ax2.tick_params(axis='y', labelcolor='tab:orange')
+
+desired_ticks = [2007, 2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024]
+ax1.set_xticks(desired_ticks)
+ax1.set_xticklabels(desired_ticks, rotation=45)
+
+tick_labels = [t for t in desired_ticks if t in df_yearly.index]
+ax1.set_xticks(tick_labels)
+ax1.set_xticklabels(tick_labels, rotation=45)
+
+handles1, labels1 = ax1.get_legend_handles_labels()
+handles2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(handles1 + handles2,
+           labels1  + labels2,
+           loc='upper left')
+
+plt.title("YEARLY AIRBNB LISTING COUNT AND AVERAGE PRICE IN LOS ANGELES")
+plt.tight_layout()
+sns.despine()
+plt.show()
+```
+<br>
+
+![alt text](/img/posts/yearly_listing_count_airbnb.jpg)
 
