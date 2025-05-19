@@ -147,7 +147,7 @@ losangeles_neighborhood.query('price <= 10')
 | **Temporal hint:** `id` (proxy for listing age) shows a **–0.32** correlation with `number_of_reviews` | Older listings (low `id` numbers) have had more time to accumulate reviews, matching intuition. |
 | **Minimum nights & availability:** weak relationships with everything ( \|ρ\| < 0.15) | Minimum-stay rules and calendar availability don’t meaningfully co-vary with price in this snapshot. |
 
-![alt text](/img/posts/coffee_python.jpg)
+![alt text](/img/posts/Correlation Matrix.jpg)
 
 **Take-home:** Property *size* drives price far more than host behavior or review volume. Because the size variables move together, downstream modeling should avoid including them all in an **unregularized** regression—you’ll get inflated variance.
 
