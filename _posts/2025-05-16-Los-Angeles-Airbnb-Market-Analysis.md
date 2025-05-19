@@ -162,3 +162,55 @@ plt.show()
 
 **Take-home:** Property *size* drives price far more than host behavior or review volume. Because the size variables move together, downstream modeling should avoid including them all in an **unregularized** regression—you’ll get inflated variance.
 
+### Neighborhood Level Pricing
+
+```python
+top_10    = losangeles_neighborhoods.nlargest(10, "price")
+bottom_10 = losangeles_neighborhoods.nsmallest(10, "price")
+
+import textwrap
+
+def wrap_yticklabels(ax, width=20, align="right"):
+    new_labels = [
+        textwrap.fill(t.get_text(), width) for t in ax.get_yticklabels()
+    ]
+    ax.set_yticklabels(new_labels, ha=align)
+
+def plot_neigh_prices(df, title, color):
+    fig, ax = plt.subplots(figsize=(11, 6))
+
+    (df.sort_values("price")
+       .plot(kind="barh",
+             y="price",
+             ax=ax,
+             legend=False,
+             color=color,
+             zorder=3))
+
+    ax.set_title(title)
+    ax.set_xlabel("Price per night (USD)")
+    ax.set_ylabel("Neighborhood")
+    ax.grid(axis="x", linestyle="--", alpha=0.4)
+
+    wrap_yticklabels(ax, width=20)
+
+    plt.tight_layout()
+    return fig, ax
+
+plot_neigh_prices(
+    top_10,
+    "HIGHEST AVERAGE LISTING PRICE BY LOS ANGELES NEIGHBORHOODS",
+    color="tab:blue",
+)
+
+plot_neigh_prices(
+    bottom_10,
+    "LOWEST AVERAGE LISTING PRICE BY LOS ANGELES NEIGHBORHOODS",
+    color="tab:green",
+)
+
+plt.show()
+
+```
+
+<br>
