@@ -216,3 +216,9 @@ plt.show()
 ```
 
 <br>
+
+![alt text](/img/posts/highest_average_pricing_by_los_angeles_neighborhood.jpg)
+
+![alt text](/img/posts/lowest_average_pricing_by_los_angeles_neighborhood.jpg)
+
+
