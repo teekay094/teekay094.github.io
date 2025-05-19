@@ -18,7 +18,8 @@ I have been a Los Angeles native for about 5 years now, everytime a loved one vi
 - [03. Exploratory Analysis](#exploratory-analysis)
 - [04. Regulatory Deep Dive (2016-2017)](#regulatory-deep-dive-analysis)
 - [05. COVID-19 Impact Analysis](#covid-19-impact-analysis)
-- [06. Insights & Discussion](#discussion)
+- [06. Key Insights & Take-aways](#discussion)
+- [06. Full Reproducible Code](#full-code) 
 
 ___
 
@@ -320,3 +321,270 @@ plt.show()
 
 ![alt text](/img/posts/yearly_listing_count_airbnb.jpg)
 
+##Observations
+
+* Explosive host growth from 2014–2016, plateauing once the draft ordinance surfaced in 2016–17.
+* A sharp price dip in 2020 coincides with the COVID-19 travel shutdown, followed by an above-trend rebound in 2021–22.
+
+###Regulatory Context (2016-2017)  <a name="regulatory-deep-dive-analysis"></a>
+
+| Milestone | Summary | Source |
+|-----------|---------|--------|
+| **Apr 2016 – Draft Home-Sharing Ordinance released** | First city document proposing to legalize STRs in primary residences, cap them at 90 days / yr, and create a host-registration system. | *Los Angeles City Planning* |
+| **Jun 2016 – City Planning Commission forwards revised draft** | Ordinance advanced to City Council for debate. | *Los Angeles City Planning* |
+| **Dec 2016 – Housing Committee amendments** | Added 180-day limit, clarified accessory-use status, and earmarked TOT revenue for enforcement. | *City of Los Angeles Clerk’s Office* |
+| **Jan – Oct 2017 – Public comment & committee hearings** | Multiple neighborhood councils weighed in; the PLUM Committee scheduled deliberations in Oct 2017. | *City of Los Angeles Clerk’s Office* |
+
+> *Although the final ordinance was not adopted until Dec 2018, the 2016-17 rule-making period already created regulatory uncertainty. Listings growth slowed and hosts began adjusting supply expectations, echoing quasi-experimental research on STR bans in 18 L.A.–county cities that found ≈ 50 % listing reductions post-regulation (ScienceDirect).*  
+
+---
+
+###COVID-19 Impact Analysis (2020-2021)  <a name="covid-19-impact-analysis"></a>
+
+| Impact Point | Evidence | Source |
+|--------------|----------|--------|
+| **Occupancy & Supply Shock** | Nationwide 32 % drop in urban STR demand by Apr 2020; Los Angeles mirrored the decline. | *AirDNA* |
+| **Listing Retrenchment** | Case studies across six global cities show 30-50 % of hosts delisted during Mar 2020. | *ScienceDirect* |
+| **Price Dynamics** | UCLA thesis: avg. L.A. nightly rates fell ≈ 15 % YoY in 2020, rebounded above 2019 by mid-2021 via longer “work-from-anywhere” stays. | *eScholarship* |
+| **Strategic Pivot** | Analysts predicted Airbnb would refocus on “live-like-a-local” & emphasize cleanliness to rebuild trust. | *Condé Nast Traveler* |
+| **Host Resilience Tactics** | Hosts shifted to 28-plus-day stays and moved inventory to drive-to rural markets. | *UQ Pressbooks* / *PR Newswire* |
+
+---
+
+###Key Insights & Take-aways  <a name="key-insights"></a>
+
+* **Neighborhood matters** – Median nightly rates span a six-fold range; coastal & hillside enclaves command persistent premiums.  
+* **Capacity premium** – In high-end areas like *Bel-Air*, price scales super-linearly with `accommodates`; luxury villas skew averages upward.  
+* **Regulation shapes supply** – The 2016 draft ordinance cooled listing growth even **before** adoption, supporting evidence that expectations alone influence host behavior (*ScienceDirect*).  
+* **Pandemic reset** – COVID-19 compressed prices but also flushed out lightly committed hosts, leaving a leaner, more professionalized inventory by 2022.  
+* **Policy-market feedback** – Post-COVID recovery plus full ordinance enforcement from 2019 onward suggest L.A. is settling into a new, lower-growth equilibrium balancing tourism dollars with housing concerns (*Los Angeles Housing Department*).
+
+---
+
+###Full Reproducible Code  <a name="full-code"></a>
+
+Here's the full code:
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+listings = pd.read_csv('listings.csv')
+
+pds = listings.head()
+
+listings.info()
+
+listings['host_since'] = pd.to_datetime(listings['host_since'])
+
+listings.info()
+
+# Fill missing numerical values with median
+numerical_cols = listings.select_dtypes(include=[np.number]).columns
+listings[numerical_cols] = listings[numerical_cols].fillna(listings[numerical_cols].median())
+
+# Fill missing categorical values with mode
+categorical_cols = listings.select_dtypes(include=[object]).columns
+listings[categorical_cols] = listings[categorical_cols].fillna(listings[categorical_cols].mode().iloc[0])
+
+# Correlation heatmap
+numeric_df = listings.select_dtypes(include=[np.number])
+plt.figure(figsize=(12, 8))
+sns.heatmap(numeric_df.corr(), annot=True, fmt='.2f', cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()
+
+losangeles_neighborhood = (listings.loc[:,['host_since','neighbourhood_cleansed','accommodates','price']])
+
+losangeles_neighborhood.isna().sum()
+
+losangeles_neighborhood.dropna(how='any',inplace = True)
+
+losangeles_neighborhood.describe()
+
+losangeles_neighborhood.query('price <= 10')
+
+losangeles_neighborhoods = (losangeles_neighborhood.groupby('neighbourhood_cleansed').agg({'price':'mean'}))
+losangeles_neighborhoods.head()
+losangeles_neighborhoods.sort_values('price',inplace=True)
+losangeles_neighborhoods.tail()
+                            
+losangeles_listing_accommodates = (losangeles_neighborhood.query("neighbourhood_cleansed == 'Bel-Air'").groupby('accommodates').agg({'price':'mean'}).sort_values('price'))
+losangeles_listing_accommodates.tail()
+
+losangeles_listing_overtime  = (losangeles_neighborhood.set_index('host_since').resample("Y").agg({"neighbourhood_cleansed":"count","price":"mean"}))
+losangeles_listing_overtime
+    
+#VISUALIZING THE DATA
+
+## 1 - VISUALS FOR Yearly Airbnb Listing Count and Average Price in Los Angeles
+
+df_yearly = losangeles_listing_overtime.copy()
+df_yearly.index = df_yearly.index.year
+
+fig, ax1 = plt.subplots(figsize=(10, 6))
+
+
+ax1.bar(df_yearly.index,
+        df_yearly['neighbourhood_cleansed'],
+        color='tab:blue',
+        label='Listing count')
+
+ax1.set_xlabel('Year host_since')
+ax1.set_ylabel('Number of listings', color='tab:blue')
+ax1.tick_params(axis='y', labelcolor='tab:blue')
+
+ax2 = ax1.twinx()
+ax2.plot(df_yearly.index,
+         df_yearly['price'],
+         color='tab:orange',
+         marker='o',
+         linewidth=2,
+         label='Average price')
+
+ax2.set_ylabel('Average price (USD)', color='tab:orange')
+ax2.tick_params(axis='y', labelcolor='tab:orange')
+
+desired_ticks = [2007, 2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024]
+ax1.set_xticks(desired_ticks)
+ax1.set_xticklabels(desired_ticks, rotation=45)
+
+tick_labels = [t for t in desired_ticks if t in df_yearly.index]
+ax1.set_xticks(tick_labels)
+ax1.set_xticklabels(tick_labels, rotation=45)
+
+handles1, labels1 = ax1.get_legend_handles_labels()
+handles2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(handles1 + handles2,
+           labels1  + labels2,
+           loc='upper left')
+
+plt.title("YEARLY AIRBNB LISTING COUNT AND AVERAGE PRICE IN LOS ANGELES")
+plt.tight_layout()
+sns.despine()
+plt.show()
+
+
+## 2 - VISUALS FOR HIGHEST & LOWEST AVERAGE LISTING PRICE BY LOS ANGELES NEIGHBORHOODS
+top_10    = losangeles_neighborhoods.nlargest(10, "price")
+bottom_10 = losangeles_neighborhoods.nsmallest(10, "price")
+
+import textwrap
+
+def wrap_yticklabels(ax, width=20, align="right"):
+    new_labels = [
+        textwrap.fill(t.get_text(), width) for t in ax.get_yticklabels()
+    ]
+    ax.set_yticklabels(new_labels, ha=align)
+
+def plot_neigh_prices(df, title, color):
+    fig, ax = plt.subplots(figsize=(11, 6))
+
+    (df.sort_values("price")
+       .plot(kind="barh",
+             y="price",
+             ax=ax,
+             legend=False,
+             color=color,
+             zorder=3))
+
+    ax.set_title(title)
+    ax.set_xlabel("Price per night (USD)")
+    ax.set_ylabel("Neighborhood")
+    ax.grid(axis="x", linestyle="--", alpha=0.4)
+
+    wrap_yticklabels(ax, width=20)
+
+    plt.tight_layout()
+    return fig, ax
+
+plot_neigh_prices(
+    top_10,
+    "HIGHEST AVERAGE LISTING PRICE BY LOS ANGELES NEIGHBORHOODS",
+    color="tab:blue",
+)
+
+plot_neigh_prices(
+    bottom_10,
+    "LOWEST AVERAGE LISTING PRICE BY LOS ANGELES NEIGHBORHOODS",
+    color="tab:green",
+)
+
+plt.show()
+
+## VISUALS FOR PRICING PER ACCOMODATES FOR LOS ANGELES NEIGHBORHOODS
+
+import seaborn as sns
+
+(losangeles_listing_accommodates.
+     plot.
+     barh(
+         title = 'AVERAGE LISTING PRICE BY ACCOMMODATION NUMBER IN LOS ANGELES NEIGHBORHOODS',
+         xlabel = 'Price per night(USD)',
+         ylabel = 'Neighborhood',
+         legend = None,
+         color='purple'))
+
+sns.despine()
+plt.show()
+
+## 3 - VISUALS FOR NEW AIRBNB HOSTS FOR LOS ANGELES NEIGHBORHOODS
+
+losangeles_listing_overtime['neighbourhood_cleansed'].plot(
+        ylabel = 'New Hosts',
+        title = 'NEW AIRBNB HOSTS OVER TIME IN LOS ANGELES NEIGHBORHOODS',
+        color ='blue'
+        )
+sns.despine()
+plt.show()
+
+## 4 - VISUALS FOR AVERAGE PRICE PER LISTINGS FOR LOS ANGELES NEIGHBORHOODS
+ 
+losangeles_listing_overtime['price'].plot(
+        ylabel = 'Average Price per night(USD)',
+        title = 'AVERAGE LISTING PRICE OVER TIME IN LOS ANGELES NEIGHBORHOODS',
+        color ='orange'
+        )
+sns.despine()
+plt.show()
+
+## 5 - VISUALS FOR AVERAGE PRICE PER LISTINGS FOR LOS ANGELES NEIGHBORHOODS - COVID-19
+
+ax = (losangeles_listing_overtime['price']
+        .plot(
+            ylabel='Average price per night (USD)',
+            title='AVERAGE LISTING PRICE OVER TIME IN LOS ANGELES NEIGHBORHOODS',
+            color='orange')
+      )
+
+year_marker = '2020'                     
+y_val = losangeles_listing_overtime.loc[year_marker, 'price']
+
+ax.scatter(pd.Timestamp(year_marker), y_val, s=80,  # circle size
+           facecolor='none', edgecolor='red', zorder=5)
+
+ax.annotate('COVID-19',
+            xy=(pd.Timestamp(year_marker), y_val),
+            xytext=(15, 25), textcoords='offset points',
+            arrowprops=dict(arrowstyle='->', lw=1.2, color='red'),
+            fontsize=9, color='red')
+
+sns.despine()
+plt.tight_layout()
+plt.show()
+```
+<br>
+
+Feel free to fork the notebook, plug in the latest InsideAirbnb snapshot, and explore further questions such as hedonic regression or synthetic-control comparisons with unregulated cities.
+
+References
+1. Draft Home-Sharing Ordinance, City of Los Angeles, Apr 15 2016 - Los Angeles City Planning
+2. PLUM Committee public docket, Council File 14-1635-S2, Oct 2017 - City of Los Angeles Clerk's Office
+3. City Council adopts Home-Sharing Ordinance, Dec 2018 - Los Angeles Housing Department
+4. Quasi-experimental STR ban study, Regional Science & Urban Economics 2021 - ScienceDirect
+5. Skift: Bookings down 85 % in April 2020 - Skift
+6. Skift: Long-term stays resilient in 2020 - Skift
+7. Airbnb Newsroom: Rise of remote workers, Sept 2022 - Airbnb Newsroom
+8. InsideAirbnb price progression 2019-23 via HomeISD stats - HomeISD
+9. AirDNA Los Angeles market overview, 2025
