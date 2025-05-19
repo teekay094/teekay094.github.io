@@ -221,4 +221,4 @@ plt.show()
 
 ![alt text](/img/posts/lowest_average_pricing_by_los_angeles_neighborhood.jpg)
 
-
+*Bel-Air*, *Venice*, and *Malibu* remain the priciest, while *Lincoln Heights* and *Pacoima cluster* at the lower end.
