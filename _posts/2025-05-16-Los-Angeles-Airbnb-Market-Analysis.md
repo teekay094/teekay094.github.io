@@ -19,7 +19,7 @@ I have been a Los Angeles native for about 5 years now, everytime a loved one vi
 - [04. Regulatory Deep Dive (2016-2017)](#regulatory-deep-dive-analysis)
 - [05. COVID-19 Impact Analysis](#covid-19-impact-analysis)
 - [06. Key Insights & Take-aways](#key-insights)
-- [06. Full Reproducible Code](#full-code) 
+- [07. Full Reproducible Code](#full-code) 
 
 ___
 
@@ -224,7 +224,7 @@ plt.show()
 
 *Bel-Air*, *Venice*, and *Malibu* remain the priciest, while *Lincoln Heights* and *Pacoima cluster* at the lower end.
 
-### Accomodation Pricing
+## Accomodation Pricing
 
 Using this data, I also looked in to the Average Listing Price by Accomodation Number in Los Angeles Neighborhoods
 
@@ -249,7 +249,7 @@ plt.show()
 
 ![alt text](/img/posts/average_listing_price_accomodation_number.jpg)
 
-### TEMPORAL TRENDS
+## TEMPORAL TRENDS
 
 First I started looking at Average Yearly price for Los Angeles Neighborhoods:
 
@@ -321,12 +321,13 @@ plt.show()
 
 ![alt text](/img/posts/yearly_listing_count_airbnb.jpg)
 
-##Observations
+## Observations
 
 * Explosive host growth from 2014–2016, plateauing once the draft ordinance surfaced in 2016–17.
 * A sharp price dip in 2020 coincides with the COVID-19 travel shutdown, followed by an above-trend rebound in 2021–22.
 
-### Regulatory Context (2016-2017)  <a name="regulatory-deep-dive-analysis"></a>
+#Regulatory Context (2016-2017)  <a name="regulatory-deep-dive-analysis"></a>
+
 
 | Milestone | Summary | Source |
 |-----------|---------|--------|
@@ -339,7 +340,7 @@ plt.show()
 
 ---
 
-# COVID-19 Impact Analysis (2020-2021)  <a name="covid-19-impact-analysis"></a>
+#COVID-19 Impact Analysis (2020-2021)  <a name="covid-19-impact-analysis"></a>
 
 | Impact Point | Evidence | Source |
 |--------------|----------|--------|
