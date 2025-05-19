@@ -223,6 +223,31 @@ plt.show()
 
 *Bel-Air*, *Venice*, and *Malibu* remain the priciest, while *Lincoln Heights* and *Pacoima cluster* at the lower end.
 
+### Accomodation Pricing
+
+Using this data, I also looked in to the Average Listing Price by Accomodation Number in Los Angeles Neighborhoods
+
+```python
+import seaborn as sns
+
+(losangeles_listing_accommodates.
+     plot.
+     barh(
+         title = 'AVERAGE LISTING PRICE BY ACCOMMODATION NUMBER IN LOS ANGELES NEIGHBORHOODS',
+         xlabel = 'Price per night(USD)',
+         ylabel = 'Neighborhood',
+         legend = None,
+         color='purple'))
+
+sns.despine()
+plt.show()
+
+```
+
+<br>
+
+* Image here of Accomodation Pricing
+
 ### TEMPORAL TRENDS
 
 First I started looking at Average Yearly price for Los Angeles Neighborhoods:
@@ -240,7 +265,7 @@ plt.show()
 
 <br>
 
-* Image here
+* Image here of Yearly Average Listing Price by Neighborhoods
 
-Looking at this visual, I noticed that there were 2 phases over the years where price changed spike and I looked up in to more information and found that there was impact because of the 2016-17 rule-making period already created regulatory uncertainty and COVID-19.
+Looking at this visual, I noticed that there were 2 phases over the years where price changed spike and I looked up in to more information and found that there was impact because of the 2016-17 rule-making period already created regulatory uncertainty and COVID-19. This intrigued me to do more research and take a deeper dive into regulations of Los Angeles and also the impact of COVID-19 on the number of listings & pricing.
 
