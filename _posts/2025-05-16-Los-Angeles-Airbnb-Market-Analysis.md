@@ -164,6 +164,8 @@ plt.show()
 
 ### Neighborhood Level Pricing
 
+We plot the 10 most- and least-expensive neighborhoods, wrapping y-labels for readability:
+
 ```python
 top_10    = losangeles_neighborhoods.nlargest(10, "price")
 bottom_10 = losangeles_neighborhoods.nsmallest(10, "price")
