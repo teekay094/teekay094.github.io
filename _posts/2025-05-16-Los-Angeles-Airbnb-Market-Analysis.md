@@ -18,7 +18,7 @@ I have been a Los Angeles native for about 5 years now, everytime a loved one vi
 - [03. Exploratory Analysis](#exploratory-analysis)
 - [04. Regulatory Deep Dive (2016-2017)](#regulatory-deep-dive-analysis)
 - [05. COVID-19 Impact Analysis](#covid-19-impact-analysis)
-- [06. Key Insights & Take-aways](#discussion)
+- [06. Key Insights & Take-aways](#key-insights)
 - [06. Full Reproducible Code](#full-code) 
 
 ___
@@ -326,7 +326,7 @@ plt.show()
 * Explosive host growth from 2014–2016, plateauing once the draft ordinance surfaced in 2016–17.
 * A sharp price dip in 2020 coincides with the COVID-19 travel shutdown, followed by an above-trend rebound in 2021–22.
 
-###Regulatory Context (2016-2017)  <a name="regulatory-deep-dive-analysis"></a>
+### Regulatory Context (2016-2017)  <a name="regulatory-deep-dive-analysis"></a>
 
 | Milestone | Summary | Source |
 |-----------|---------|--------|
@@ -339,7 +339,7 @@ plt.show()
 
 ---
 
-###COVID-19 Impact Analysis (2020-2021)  <a name="covid-19-impact-analysis"></a>
+# COVID-19 Impact Analysis (2020-2021)  <a name="covid-19-impact-analysis"></a>
 
 | Impact Point | Evidence | Source |
 |--------------|----------|--------|
@@ -351,7 +351,7 @@ plt.show()
 
 ---
 
-###Key Insights & Take-aways  <a name="key-insights"></a>
+# Key Insights & Take-aways  <a name="key-insights"></a>
 
 * **Neighborhood matters** – Median nightly rates span a six-fold range; coastal & hillside enclaves command persistent premiums.  
 * **Capacity premium** – In high-end areas like *Bel-Air*, price scales super-linearly with `accommodates`; luxury villas skew averages upward.  
@@ -361,7 +361,7 @@ plt.show()
 
 ---
 
-###Full Reproducible Code  <a name="full-code"></a>
+# Full Reproducible Code  <a name="full-code"></a>
 
 Here's the full code:
 ```python
