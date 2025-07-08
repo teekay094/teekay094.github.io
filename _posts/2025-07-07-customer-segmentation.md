@@ -352,7 +352,7 @@ ___
 <br>
 # Application <a name="kmeans-application"></a>
 
-Even those this is a simple solution, based upon high level product areas it will help leaders in the business, and category managers gain a clearer understanding of the customer base.
+Even though this is a simple solution, based upon high level product areas it will help leaders in the business, and category managers gain a clearer understanding of the customer base.
 
 Tracking these clusters over time would allow the client to more quickly react to dietary trends, and adjust their messaging and inventory accordingly.
 
